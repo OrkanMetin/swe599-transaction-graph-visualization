@@ -1,2 +1,3 @@
-# SWE 599 Project: Transaction Graph Visualization
-swe599-transaction-graph-visualization
+# Transaction Graph Visualization
+
+Welcome to **transaction-graph-visualization** code repository, which includes the backend and the client applications for visualizing sample transaction graph data.

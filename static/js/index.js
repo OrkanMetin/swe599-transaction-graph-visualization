@@ -1,5 +1,5 @@
 $(function () {
-    var graphDataUrl = "http://localhost:5000/graph"
+    var graphDataUrl = "https://transaction-graph-viz.herokuapp.com/graph"
     var graphDatas = []
     var toUsers = []
     var fromUsers = []

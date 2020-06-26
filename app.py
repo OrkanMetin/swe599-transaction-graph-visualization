@@ -7,7 +7,7 @@ from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/graph'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'DATABASE_URL'
-app.debug = True
+#app.debug = True
 db = SQLAlchemy(app)
 
 

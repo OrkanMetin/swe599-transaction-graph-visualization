@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+
 
 # init app
 app = Flask(__name__)
@@ -43,6 +44,11 @@ class GraphSchema(ma.Schema):
 # init schema
 graph_schema = GraphSchema(strict=True)
 graphs_schema = GraphSchema(many=True, strict=True)
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 
 # Get All Graphs

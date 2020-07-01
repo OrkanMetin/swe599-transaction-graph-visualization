@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_swagger_ui import get_swaggerui_blueprint
 import os
 
 # init app
@@ -12,6 +13,18 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #app.debug = True
 db = SQLAlchemy(app)
 
+### swagger specific ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Transaction Graph Data Provider for Visualization"
+    }
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+### end swagger specific ###
 
 # init  ma - Serialize / Deserialize Objects...
 ma = Marshmallow(app)

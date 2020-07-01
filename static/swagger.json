@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "The panel below displays documentation all endpoints, parameters and error messages available to the transaction-graph-viz API. For a more detailed explanation of API structure, please read the full documentation.",
+    "version": "1.0.0",
+    "title": "Transaction Graph Data Provider for Visualization",
+    "contact": {
+      "email": "orkanmetin@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Graph Request",
+      "description": "Example API for requesting and return graph requests"
+    }
+  ],
+  "paths": {
+    "/post_graph": {
+      "post": {
+        "tags": [
+          "Graph Request"
+        ],
+        "summary": "Create a new graph",
+        "requestBody": {
+          "description": "Graph Request Post Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+        "200": {
+            "description": "OK",
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/graph": {
+
+      "get": {
+        "tags": [
+          "All Graphs Request"
+        ],
+        "summary": "Get graph request for all graphes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Graph request not found."
+          }
+        }
+      }
+    },
+    "/graph/id/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the graph that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Graph Request"
+        ],
+        "summary": "Get graph request with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "id",
+            "required": true,
+            "description": "Graph Request id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Graph request not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "edit a graph request by ID",
+        "tags": [
+          "Graph Request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "id",
+            "required": true,
+            "description": "Graph Request id"
+          }
+        ],
+        "requestBody": {
+          "description": "Graph Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Graph Request by ID",
+        "tags": [
+          "Graph Request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "id",
+            "required": true,
+            "description": "Graph Request id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createGraphRequestPostBody"
+              }
+            }
+          }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Graph Request not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "createGraphNodeSchema": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "label": {
+            "type": "string",
+            "example": "LeBron James"
+          },
+          "group": {
+            "type": "string",
+            "example": 1
+          }
+        }
+      },
+      "createGraphEdgeSchema": {
+        "properties": {
+          "from": {
+            "type": "integer",
+            "example": 2
+          },
+          "to": {
+            "type": "integer",
+            "example": 3
+          },
+          "label": {
+            "type": "string",
+            "example": "2"
+          },
+          "arrows": {
+            "type": "string",
+            "example": "to"
+          }
+        }
+      },
+      "createGraphOptionsSchema": {
+        "properties": {
+          "physics": {
+            "type": "boolean",
+            "example": false
+          },
+          "nodes": {
+            "type": "object",
+            "$ref": "#/components/schemas/createGraphOptionsNodesSchema"
+          },
+          "edges": {
+            "type": "object",
+              "$ref": "#/components/schemas/createGraphOptionsEdgesSchema"
+
+          }
+        }
+      },
+      "createGraphOptionsNodesSchema": {
+        "properties": {
+          "physics": {
+            "shape": "string",
+            "example": "dot"
+          },
+          "size": {
+            "type": "integer",
+            "example": 30
+          },
+          "font": {
+            "type": "object",
+              "$ref": "#/components/schemas/createGraphOptionsNodesFontSchema"
+
+          },
+          "borderWidth": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "createGraphOptionsEdgesSchema": {
+        "properties": {
+          "width": {
+            "type": "integer",
+            "example": 2
+          },
+          "arrows": {
+            "type": "string",
+            "example": "to"
+          }
+        }
+      },
+      "createGraphOptionsNodesFontSchema": {
+        "properties": {
+          "size": {
+            "type": "integer",
+            "example": 32
+          }
+        }
+      },
+      "createGraphRequestPostBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "dsfdsfd",
+            "example": "Graph 07"
+          },
+          "description": {
+            "type": "string",
+            "format": "string",
+            "example": "This is graph number 07"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "26.06.2020"
+          },
+          "nodes": {
+            "type": "array",
+            "items":{
+              "$ref": "#/components/schemas/createGraphNodeSchema"
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items":{
+              "$ref": "#/components/schemas/createGraphEdgeSchema"
+            }
+          },
+	      "data": {
+            "type": "string",
+            "format": "string",
+            "example": ""
+          },
+          "options" : {
+            "type": "array",
+            "items":{
+              "$ref": "#/components/schemas/createGraphOptionsSchema"
+            }
+          }
+        }
+      }
+    }
+  }
+}

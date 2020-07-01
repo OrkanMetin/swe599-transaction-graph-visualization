@@ -61,6 +61,7 @@ class GraphSchema(ma.Schema):
 graph_schema = GraphSchema(strict=True)
 graphs_schema = GraphSchema(many=True, strict=True)
 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -139,4 +140,4 @@ def delete_graph(id):
 
 # run server
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

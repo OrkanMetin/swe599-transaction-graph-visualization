@@ -54,3 +54,4 @@ uritemplate==3.0.1
 urllib3==1.25.7
 virtualenv==20.0.17
 Werkzeug==1.0.1
+flask_swagger_ui

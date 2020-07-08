@@ -3,8 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_swagger_ui import get_swaggerui_blueprint
 import os
-import logging
-
 
 
 # init app
@@ -15,10 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #app.debug = True
 db = SQLAlchemy(app)
-
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
-
 
 ### swagger specific ###
 SWAGGER_URL = '/swagger'
